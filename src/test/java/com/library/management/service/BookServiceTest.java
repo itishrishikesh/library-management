@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BookServiceTest {
 
@@ -34,5 +35,15 @@ public class BookServiceTest {
         Mockito.when(bookRepository.findAll()).thenReturn(expectedList);
         List<Book> actualList = bookService.getAllBooks();
         Assertions.assertEquals(expectedList, actualList);
+    }
+
+    @Test
+    public void shouldUpdateABook() {
+        Book existingBook = new Book(1, "Hidden Castle", "Jonathan Jones", "Drama", 1);
+        Mockito.when(bookRepository.findById(existingBook.id())).thenReturn(Optional.of(existingBook));
+        Book changeInExistingBook = new Book(1, "Hidden Castle", "Jonathan Jones", "Drama", 0);
+        Mockito.when(bookRepository.save(existingBook)).thenReturn(changeInExistingBook);
+        Book changedBook = bookService.updateBook(existingBook);
+        Assertions.assertEquals(changeInExistingBook, changedBook);
     }
 }
