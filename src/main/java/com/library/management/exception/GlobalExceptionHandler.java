@@ -11,4 +11,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResourceNotFoundException> handBookNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         return new ResponseEntity<>(resourceNotFoundException, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(LimitExceededException.class)
+    public ResponseEntity<LimitExceededException> handBookNotFoundException(LimitExceededException limitExceededException) {
+        return new ResponseEntity<>(limitExceededException, HttpStatus.NOT_FOUND);
+    }
 }

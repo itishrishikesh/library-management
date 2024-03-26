@@ -3,6 +3,7 @@ package com.library.management.controller;
 import com.library.management.entity.Book;
 import com.library.management.entity.Borrow;
 import com.library.management.entity.User;
+import com.library.management.exception.LimitExceededException;
 import com.library.management.service.BorrowService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,8 +34,22 @@ public class BorrowControllerTest {
 
         Mockito.when(borrowService.borrowBook(0, 0)).thenReturn(expectedBorrow);
 
-        ResponseEntity<Borrow> response = borrowController.borrowBook(expectedBorrow);
+        ResponseEntity<Borrow> response = borrowController.borrowBook(0, 0);
 
         Assertions.assertEquals(expectedBorrow, response.getBody());
+    }
+
+    @Test
+    public void shouldNotBeAbleToBorrowAboveLimit() {
+        Mockito.when(borrowService.borrowBook(1, 1)).thenThrow(LimitExceededException.class);
+
+        Assertions.assertThrows(LimitExceededException.class, () -> borrowController.borrowBook(1, 1));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnABook() {
+        Mockito.doNothing().when(borrowService).returnBook(1, 1);
+
+        Assertions.assertDoesNotThrow(() -> borrowController.returnBook(1, 1));
     }
 }
