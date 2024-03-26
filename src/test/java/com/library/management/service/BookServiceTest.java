@@ -40,7 +40,7 @@ public class BookServiceTest {
     @Test
     public void shouldUpdateABook() {
         Book existingBook = new Book(1, "Hidden Castle", "Jonathan Jones", "Drama", 1);
-        Mockito.when(bookRepository.findById(existingBook.id())).thenReturn(Optional.of(existingBook));
+        Mockito.when(bookRepository.findById(existingBook.getId())).thenReturn(Optional.of(existingBook));
         Book changeInExistingBook = new Book(1, "Hidden Castle", "Jonathan Jones", "Drama", 0);
         Mockito.when(bookRepository.save(existingBook)).thenReturn(changeInExistingBook);
         Book changedBook = bookService.updateBook(existingBook);
