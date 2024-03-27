@@ -45,13 +45,4 @@ public class BookControllerTest {
         Assertions.assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
         Assertions.assertEquals(List.of(), responseEntity.getBody());
     }
-
-    @Test
-    public void shouldUpdateBook() {
-        Book newBook = new Book(1, "3 Musketeers", "Jona Lolla", "Fiction", 1);
-        Mockito.when(bookService.updateBook(newBook)).thenReturn(newBook);
-        ResponseEntity<Book> responseEntity = bookController.updateBook(newBook);
-        Assertions.assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
-        Assertions.assertEquals(newBook, responseEntity.getBody());
-    }
 }

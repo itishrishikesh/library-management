@@ -17,9 +17,4 @@ public class BookController {
     public ResponseEntity<List<Book>> getAllBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
-
-    @PutMapping("/book")
-    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-        return ResponseEntity.ok(bookService.updateBook(book));
-    }
 }

@@ -17,9 +17,4 @@ public class BookService {
     public List<Book> getAllBooks() {
         return bookRepository.findAll().stream().filter(book -> book.getQuantity() > 0).toList();
     }
-
-    public Book updateBook(Book book) {
-        bookRepository.findById(book.getId()).orElseThrow(() -> new ResourceNotFoundException("book", book.getId()));
-        return bookRepository.save(book);
-    }
 }

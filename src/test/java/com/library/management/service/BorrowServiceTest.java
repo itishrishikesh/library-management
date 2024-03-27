@@ -6,6 +6,7 @@ import com.library.management.entity.User;
 import com.library.management.exception.LimitExceededException;
 import com.library.management.repository.BookRepository;
 import com.library.management.repository.BorrowRepository;
+import com.library.management.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
