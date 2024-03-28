@@ -49,6 +49,9 @@ public class BorrowService {
     public void returnBook(long bookId, long userId) {
         Borrow borrow = borrowRepository.findByBookIdAndUserId(bookId, userId).orElseThrow(() -> new ResourceNotFoundException("book", bookId));
 
-        borrowRepository.delete(borrow);
+        borrow.getBook().setQuantity(borrow.getBook().getQuantity() - 1);
+        bookRepository.save(borrow.getBook());
+
+        borrowRepository.deleteById(borrow.getId());
     }
 }
