@@ -29,7 +29,7 @@ public class BookControllerTest {
     public void shouldListAllBooksInLibrary() {
         List<Book> expectedList = List.of(
                 new Book(1, "Secrets from Heaven", "James Bell", "Self-Help", 2),
-                new Book(3, "3 Musketeers", "Jona Lolla", "Fiction", 1),
+                new Book(2, "3 Musketeers", "Jona Lolla", "Fiction", 1),
                 new Book(3, "Charger", "Nathan Cain", "Science Fiction", 1)
         );
         Mockito.when(bookService.getAllBooks()).thenReturn(expectedList);
@@ -39,7 +39,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void shouldReturnNoBooks() {
+    public void shouldListNoBooks() {
         Mockito.when(bookService.getAllBooks()).thenReturn(List.of());
         ResponseEntity<List<Book>> responseEntity = bookController.getAllBooks();
         Assertions.assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
