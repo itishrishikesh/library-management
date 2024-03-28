@@ -24,6 +24,9 @@ public class BorrowService {
     @Value("${borrow.limit}")
     int borrowingLimit;
 
+    @Value("${default.return.time}")
+    int defaultReturnTime;
+
     public Borrow borrowBook(long userId, long bookId) throws LimitExceededException, ResourceNotFoundException {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new ResourceNotFoundException("book", bookId));
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user", userId));
@@ -34,7 +37,7 @@ public class BorrowService {
 
         book.setQuantity(book.getQuantity() - 1);
         bookRepository.save(book);
-        Borrow borrow = new Borrow(0, user, book, LocalDate.now(), LocalDate.now().plusDays(15));
+        Borrow borrow = new Borrow(0, user, book, LocalDate.now(), LocalDate.now().plusDays(defaultReturnTime));
 
         return borrowRepository.save(borrow);
     }

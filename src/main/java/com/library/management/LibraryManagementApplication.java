@@ -16,5 +16,4 @@ public class LibraryManagementApplication {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-
 }
