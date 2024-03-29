@@ -38,7 +38,7 @@ public class BorrowControllerIT {
     @Sql(value = "/test_delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testReturnABook() {
         ResponseEntity<Borrow> response = restTemplate.postForEntity("http://localhost:" + port + "/api/user/1/borrow/1", null, Borrow.class);
-        restTemplate.delete("http://localhost:" + port + "/api/user/1/return/1", null, Void.class);
+        restTemplate.delete("http://localhost:" + port + "/api/user/1/return/1");
         Assertions.assertTrue(response.getStatusCode().is2xxSuccessful());
     }
 }

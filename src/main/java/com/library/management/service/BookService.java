@@ -17,4 +17,8 @@ public class BookService {
     public List<Book> getAllBooks() {
         return bookRepository.findAll().stream().filter(book -> book.getQuantity() > 0).toList();
     }
+
+    public Book saveBook(Book book) {
+        return bookRepository.save(book);
+    }
 }
